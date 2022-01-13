@@ -1,16 +1,12 @@
-# This is a sample Python script.
+import requests as requests
+from bs4 import BeautifulSoup
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    response = requests.get('https://www.python.org')
+    with open('test.html', 'w', encoding="utf-8") as file:
+        file.write(response.text)
+    with open("test.html", "r") as f:
+        contents = f.read()
+        soup = BeautifulSoup(contents, 'lxml')
+        print(soup.find("div", attrs={"class": "medium-widget event-widget last"}))
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
